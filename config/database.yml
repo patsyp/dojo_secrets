@@ -82,4 +82,4 @@ test:
 production:
   <<: *default
   database: DojoSecrets_production
- 
+  password: <%= ENV['DOJOSECRETS_DATABASE_PASSWORD'] %>

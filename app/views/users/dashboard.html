@@ -1,0 +1,19 @@
+
+<a href="/users/<%=@current_user.id%>">View Profile</a>
+<h3>Welcome, <%=@current_user.name%></h3>
+<h3>Secrets</h3>
+
+<% @secrets.each do |secret| %>
+<div>
+	<p><%= secret.content %></p>
+	<p><%=secret.likes.length %> likes</p>
+	<% if secret.user.id == session[:user_id] %>
+		<button><a href="/secrets/<%= secret.id %>" data-method="delete">Delete</a></button>
+	<%end%>
+	<% if @likes.include? secret.id %>
+		<button><a href="/likes/<%= secret.id %>" data-method="delete">Unlike</a></button>
+	<% else %>
+		<button><a href="/likes/<%= secret.id %>" data-method="post">Like</a></button>
+	<%end%>
+</div>
+<% end %>

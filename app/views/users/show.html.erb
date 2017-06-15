@@ -1,0 +1,25 @@
+<a href="/dashboard">Home</a>
+ <h3><%=@current_user.name%></h3>
+
+<form action="/secrets" method="post">
+	<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+	<label>New Secret</label>
+	<div>
+		<textarea name="secret[content]"></textarea>
+	</div>
+	<input type="submit" value="Create">
+</form>
+
+
+<p><%=flash[:secret_errors]%></p>
+
+<h4>Secrets</h4>
+<% @current_user.secrets.each do |secret| %>
+<p><%=secret.content%></p>
+<% end %>
+
+<h4>Secrets Liked</h4>
+<% @liked_secrets.each do |secret| %>
+	<p><%=secret.content%></p>
+	<p><%=secret.likes.length%></p>
+<% end %>
